@@ -12,32 +12,53 @@ import Alamofire
 
 class ApiManager: NSObject
 {
-
-    func getAllCategory() -> [Any]?
+    static let sharedInstance = ApiManager()
+    
+    let baseURL = "https://boilapi.apphb.com/api/"
+    
+    
+    func getAllCategory(success: @escaping ([ProductCategory], [Product]) -> Void, failure: () -> Void)
     {
-        
-        Alamofire.request("https://boilapi.apphb.com/api/categoties").response { response in
-            print("Request: \(response.request)")
-            print("Response: \(response.response)")
-            print("Error: \(response.error)")
-            
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
+        Alamofire.request(baseURL + "categories").responseJSON
+            { response in
+                
+            if let json = response.result.value
+            {
+
+                var categories = [ProductCategory]()
+                for  dict in json as! [Dictionary<String, Any>]
+                {
+                   let category =  CoreDataManager.sharedInstance.updateCategory(dictionary: dict)
+                    categories.append(category)
+                }
+                self.getAllProduct(success: { (products :[Product]) in
+                    success(categories, products)
+                }, failure: { 
+                    
+                })
+   
             }
         }
-        
-        
-//        Alamofire.request("https://boilapi.apphb.com/api/categoties").response { response in
-//            print("Request: \(response.request)")
-//            print("Response: \(response.response)")
-//            print("Error: \(response.error)")
-//            
-//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                print("Data: \(utf8Text)")
-//            }
-//        }
-        
-        
-        return nil
+    }
+    
+    
+    func getAllProduct(success: @escaping ([Product]) -> Void, failure: () -> Void)
+    {
+        Alamofire.request(baseURL + "products").responseJSON
+            { response in
+                
+                if let json = response.result.value
+                {
+                    
+                    var products = [Product]()
+                    for  dict in json as! [Dictionary<String, Any>]
+                    {
+                        let product =  CoreDataManager.sharedInstance.updateProduct(dictionary: dict)
+                        products.append(product)
+                    }
+                    success(products)
+                    
+                }
+        }
     }
 }

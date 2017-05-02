@@ -1,15 +1,22 @@
 PODS:
   - Alamofire (4.4.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
   - LFSideViewController (2.0.0)
+  - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - AlamofireImage (~> 3.1)
   - LFSideViewController (~> 2.0.0)
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   LFSideViewController: 35c31bb53735f809180518beab09c9e6dc377a77
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 228c78a9253e01991ecb15c842f38f2d0e609fd2
+PODFILE CHECKSUM: ea2b2803c4105b29104e253caf81a82715e71957
 
 COCOAPODS: 1.2.0

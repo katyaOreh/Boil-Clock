@@ -14,7 +14,14 @@ class CustomCollectionViewCell: UICollectionViewCell
     @IBOutlet weak var label: UILabel!
     
     
-    override func awakeFromNib() {
+    open override func prepareForReuse()
+    {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
         self.clipsToBounds = true
     }

@@ -11,9 +11,14 @@ import UIKit
 class ProductCollectionViewCell: UICollectionViewCell
 {
     @IBOutlet weak var imageView: UIImageView!
-
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    open override func prepareForReuse()
+    {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
     
     override func awakeFromNib()
     {
