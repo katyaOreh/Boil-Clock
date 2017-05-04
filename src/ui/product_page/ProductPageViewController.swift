@@ -57,6 +57,7 @@ class ProductPageViewController: UIViewController
         self.productNameLabel.text    = product?.title
         
         self.productImageView.af_setImage(withURL: URL.init(string: (product?.image_url!)!)!)
+        
 
     }
     
@@ -69,6 +70,7 @@ class ProductPageViewController: UIViewController
     func starBtnTapped(_ sender: UIButton)
     {
         sender.isSelected = !sender.isSelected
+        product?.isFavorite = sender.isSelected
     }
 
     @IBAction func startTapped(_ sender: UIButton)

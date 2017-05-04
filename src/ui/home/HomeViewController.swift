@@ -10,18 +10,17 @@ import UIKit
 import Foundation
 import SVProgressHUD
 
-class HomeViewController: UIViewController, UITextViewDelegate
+class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var searchTextField: UITextField!
     
-    var categories       = [ProductCategory]()
-    var productIndex     = 0
-    var favoriteProducts = [Product]()
-    private var products = [Product]()
-    private var selectedCategory = ""
+    public let dropdown          = DropDown()
+    private var categories       = [ProductCategory]()
+    private var favoriteProducts = [Product]()
+    private var products         = [Product]()
     
     let colors = [Constants.Color.tacao, Constants.Color.perano, Constants.Color.rajah,
                   Constants.Color.tickleMePink, Constants.Color.turquoiseBlue, Constants.Color.feijoa,
@@ -39,6 +38,11 @@ class HomeViewController: UIViewController, UITextViewDelegate
         searchTextField.leftViewMode = .always
         searchTextField.leftView     = leftView
         
+        view.addSubview(dropdown)
+        
+        dropdown.addSubview(dropdown.table)
+        
+    
     }
     
     override func viewDidLoad()
@@ -64,14 +68,23 @@ class HomeViewController: UIViewController, UITextViewDelegate
         }
         SVProgressHUD.show()
         ApiManager.sharedInstance.getAllCategory(success: { (categories: [ProductCategory], products :[Product] ) in
-            self.categories = categories.sorted(by: { $0.id < $1.id})
-            self.products   = products
+            self.categories       = categories.sorted(by: { $0.id < $1.id})
+            self.products         = products
+            self.favoriteProducts = products.filter {$0.isFavorite == true}
             self.categoryCollectionView.reloadData()
             self.productsCollectionView.reloadData()
             SVProgressHUD.dismiss()
         }) {
             
         }
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        self.favoriteProducts = products.filter {$0.isFavorite == true}
+        self.productsCollectionView.reloadData()
     }
     
     
@@ -88,70 +101,108 @@ class HomeViewController: UIViewController, UITextViewDelegate
     
     
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        
         if segue.identifier == "productsList"
         {
             let destinationVC = segue.destination as! ProductsListViewController
-            destinationVC.title    = selectedCategory
-            destinationVC.products = products.filter {
-                $0.category?.type == Int16(productIndex)
+            
+            if let indexPath = categoryCollectionView?.indexPath(for: sender as! CustomCollectionViewCell)
+            {
+                let productsArray      = products.filter { $0.category?.id == Int16(indexPath.row)}
+                destinationVC.title    =  categories[indexPath.row].title
+                destinationVC.products = productsArray
             }
         }
-        
-        //        destinationVC.products = self.products.   filter({($0.title == "1") -> Bool in
-        //        })
-    }
-    
-}
-
-// MARK: UICollectionView Delegate & DataSource Implementation
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-{
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
-        return  collectionView.tag == 1 ? favoriteProducts.count : categories.count
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        
-        if collectionView.tag == 1
+        else if segue.identifier == "productDetails"
         {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCollectionViewCell
-            //            let product          = products[indexPath.row]
-            //            cell.label.text      = product.name
-            //            cell.imageView.image = UIImage.init(named: product.imageName)
+            let destinationVC = segue.destination as! ProductPageViewController
+            if let indexPath = productsCollectionView?.indexPath(for: sender as! ProductCollectionViewCell)
+            {
+                destinationVC.product = favoriteProducts[indexPath.row]
+            }
+        }
+    }
+    
+    // MARK: UICollectionView Delegate & DataSource Implementation
+  
+        public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+        {
+            return  collectionView.tag == 1 ? favoriteProducts.count : categories.count
+        }
+        
+        public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+        {
+            
+            if collectionView.tag == 1
+            {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCollectionViewCell
+                let product          = favoriteProducts[indexPath.row]
+                cell.label.text      = product.title
+                cell.imageView.af_setImage(withURL:URL.init(string: product.image_url!)!, placeholderImage: nil, filter: nil, imageTransition: .noTransition, completion: { (response) -> Void in
+                    cell.activityIndicator.stopAnimating()
+                })
+                return cell
+            }
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CustomCollectionViewCell
+            
+            let category          = categories[indexPath.row]
+            cell.label.text       = category.title
+            cell.backgroundColor  = hexStringToUIColor(hex: category.color!)
+            cell.tag              = Int(category.type)
+            if let name = category.image_name
+            {
+                cell.imageView.image = UIImage.init(named: name)
+            }
             return cell
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CustomCollectionViewCell
-        
-        let category          = categories[indexPath.row]
-        cell.label.text       = category.title
-        cell.backgroundColor  = hexStringToUIColor(hex: category.color!)
-        
-        if let name = category.image_name
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
-            cell.imageView.image = UIImage.init(named: name)
+            if collectionView.tag == 1
+            {
+                return CGSize.init(width: collectionView.frame.width / 4, height: collectionView.frame.height)
+            }
+            return CGSize.init(width: collectionView.frame.width / 3, height: collectionView.frame.height / 3)
         }
-        return cell
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        if collectionView.tag == 1
+        
+        public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
         {
-            return CGSize.init(width: collectionView.frame.width / 3, height: collectionView.frame.height)
+            if (collectionView.tag == 2)
+            {
+                let cell = collectionView.cellForItem(at: indexPath)
+                performSegue(withIdentifier: "productsList", sender: cell)
+            }else{
+                let cell = collectionView.cellForItem(at: indexPath)
+                performSegue(withIdentifier: "productDetails", sender: cell)
+            }
+            
         }
-        return CGSize.init(width: collectionView.frame.width / 3, height: collectionView.frame.height / 3)
-    }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
-        productIndex = indexPath.row
+        let str = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+        
+        dropdown.substring = str
+        dropdown.items =  str.characters.count == 0 ? [] : getProductForLetter(lets: str)
+        
+        dropdown.frame = CGRect.init(x: textField.frame.origin.x,
+                                     y: textField.frame.maxY + 10,
+                                     width: textField.frame.width ,
+                                     height: 100)
+        
+        dropdown.table.reloadData()
+        return  true
     }
     
+    
+    func getProductForLetter(lets :String) -> [Product]
+    {
+        let mac = products.filter{$0.title!.lowercased().contains(lets.lowercased())}
+        return mac
+    }
 }
+
+

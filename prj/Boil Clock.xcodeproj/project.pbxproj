@@ -33,6 +33,8 @@
 		4AEB84EC1EAA84DC005B7C9D /* open-sans-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB84E91EAA799C005B7C9D /* open-sans-bold.ttf */; };
 		4AEB84EE1EAA84E2005B7C9D /* STIXGeneral-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB84EB1EAA799C005B7C9D /* STIXGeneral-Regular.otf */; };
 		4AEEE24E1EA67BA700E3FC22 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEEE24C1EA67BA700E3FC22 /* Constants.swift */; };
+		4AF60B441EBB43AF00BDC34F /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF60B431EBB43AF00BDC34F /* DropDown.swift */; };
+		4AF60B481EBB80D900BDC34F /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF60B471EBB80D900BDC34F /* DropDownCell.swift */; };
 		B730E602BC62593A9B9599CA /* Pods_Boil_Clock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E73A541ED29CFF1A2D48A9C /* Pods_Boil_Clock.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		4AEB84EB1EAA799C005B7C9D /* STIXGeneral-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "STIXGeneral-Regular.otf"; sourceTree = "<group>"; };
 		4AEEE2311EA6715300E3FC22 /* Boil Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Boil Clock.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AEEE24C1EA67BA700E3FC22 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4AF60B431EBB43AF00BDC34F /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
+		4AF60B471EBB80D900BDC34F /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		63799CD27DCC57CF23488C33 /* Pods-Boil Clock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boil Clock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Boil Clock/Pods-Boil Clock.debug.xcconfig"; sourceTree = "<group>"; };
 		9E73A541ED29CFF1A2D48A9C /* Pods_Boil_Clock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Boil_Clock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A7F7C46549D682644156F7 /* Pods-Boil Clock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boil Clock.release.xcconfig"; path = "Pods/Target Support Files/Pods-Boil Clock/Pods-Boil Clock.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				4A752A9A1EB279FF0097DE54 /* BaseViewController.swift */,
+				4AF60B431EBB43AF00BDC34F /* DropDown.swift */,
+				4AF60B471EBB80D900BDC34F /* DropDownCell.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -432,11 +438,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AF60B481EBB80D900BDC34F /* DropDownCell.swift in Sources */,
 				4AEB84841EAA45A3005B7C9D /* AppDelegate.swift in Sources */,
 				4A8CFA791EADEF2C0077B7BE /* CustomCollectionViewCell.swift in Sources */,
 				4A8CFA7F1EADEF2C0077B7BE /* ProductCollectionViewCell.swift in Sources */,
 				4A8CFA631EAD3E460077B7BE /* CoreDataManager.swift in Sources */,
 				4A20D2AA1EB14C0600B10BA5 /* ProductCategory+CoreDataClass.swift in Sources */,
+				4AF60B441EBB43AF00BDC34F /* DropDown.swift in Sources */,
 				4A752A9B1EB279FF0097DE54 /* BaseViewController.swift in Sources */,
 				4A8CFA7C1EADEF2C0077B7BE /* RootViewController.swift in Sources */,
 				4A8CFA7A1EADEF2C0077B7BE /* HomeViewController.swift in Sources */,

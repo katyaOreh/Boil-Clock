@@ -8,18 +8,23 @@
 
 import UIKit
 
-class ProductsListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
+class ProductsListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     
-    public var products : [Product]!
     private var index = 0
     @IBOutlet weak var collectionView: UICollectionView!
+    public var products = [Product]()
+    {
+        didSet
+        {
+            collectionView?.reloadData()
+        }
+    }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        super.viewDidLoad()
+        
         let backButton = UIBarButtonItem.init(image: UIImage.init(named: "back_btn"),
                                               style: .plain,
                                               target: self,
@@ -28,13 +33,18 @@ class ProductsListViewController: UIViewController, UICollectionViewDelegate, UI
         self.navigationItem.leftBarButtonItem = backButton
         self.collectionView?.reloadData()
         
+        
+        
     }
-    override func loadView()
-    {
-        super.loadView()
-    }
+  
     
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+        debugPrint("ProductsListViewController didReceiveMemoryWarning")
+    }
 
+    
     func backBtnTapped()
     {
         _ = navigationController?.popViewController(animated: true)
@@ -43,7 +53,7 @@ class ProductsListViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return products.count
+        return  products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
@@ -66,19 +76,24 @@ class ProductsListViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        index = indexPath.row
+        let cell = collectionView.cellForItem(at: indexPath)
+        performSegue(withIdentifier: "productDetails", sender: cell)
+        
     }
     
     
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize.init(width: collectionView.frame.width / 3 - 10, height: collectionView.frame.height / 3)
+        return CGSize.init(width: collectionView.frame.width / 3 , height: collectionView.frame.width / 3)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         let destinationVC = segue.destination as! ProductPageViewController
-        destinationVC.product = self.products[index]
+        if let indexPath   = collectionView?.indexPath(for: sender as! ProductCollectionViewCell)
+        {
+            destinationVC.product = products[indexPath.row]
+        }
     }
-
 }
+
