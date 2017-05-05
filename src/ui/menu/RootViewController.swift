@@ -10,23 +10,24 @@ import UIKit
 import LFSideViewController
 
 class RootViewController: LFSideViewController, LFSideViewDelegate
-{
 
+{
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.contentViewController = storyboard.instantiateViewController(withIdentifier: "NavigationViewController")
-
-        self.leftViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController")
+        self.contentViewController = storyboard.instantiateViewController(withIdentifier: "Main")
+        
+        self.leftViewController = storyboard.instantiateViewController(withIdentifier: "Left")
         
         if let sideViewController = self.sideViewController()
         {
             sideViewController.delegate = self
         }
-
+        
     }
-
+    
 
 }

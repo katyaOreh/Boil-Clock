@@ -110,7 +110,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="QlI-Gf-lhD"/>
                                 </connections>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GBQ-ma-1bM">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GBQ-ma-1bM">
                                 <rect key="frame" x="0.0" y="133" width="414" height="115"/>
                                 <color key="backgroundColor" red="0.94499760870000005" green="0.94973438980000002" blue="0.91217261549999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -133,7 +133,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hgh-4K-8Av">
                                                     <rect key="frame" x="4" y="2" width="106" height="92"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8c-5B-BNb">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8c-5B-BNb">
                                                     <rect key="frame" x="0.0" y="96" width="114" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="tmh-jL-82e"/>
@@ -350,7 +350,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="JJR-wQ-bcI" firstAttribute="leading" secondItem="Nju-T7-yg1" secondAttribute="leading" constant="16" id="2lR-J0-dxM"/>
                                     <constraint firstAttribute="width" secondItem="Nju-T7-yg1" secondAttribute="height" multiplier="1:1" id="2vb-kc-Iri"/>
@@ -421,7 +421,7 @@
         <!--Menu View Controller-->
         <scene sceneID="aqR-Iy-Clv">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" id="cf1-kp-8Ma" customClass="MenuViewController" customModule="Boil_Clock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Left" id="cf1-kp-8Ma" customClass="MenuViewController" customModule="Boil_Clock" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SXh-Up-rfj"/>
                         <viewControllerLayoutGuide type="bottom" id="3vv-9K-ltd"/>
@@ -429,19 +429,30 @@
                     <view key="view" contentMode="scaleToFill" id="2xA-wA-bZB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X0c-5B-dvL">
+                                <rect key="frame" x="0.0" y="0.0" width="302" height="736"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.51372549020000002" green="0.71764705880000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="cf1-kp-8Ma" id="s2h-tU-EFR"/>
+                                    <outlet property="delegate" destination="cf1-kp-8Ma" id="DR7-cq-ael"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.94499760866165161" green="0.9497343897819519" blue="0.91217261552810669" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTj-l4-MCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="201" y="-607"/>
+            <point key="canvasLocation" x="200.00000000000003" y="-607.33695652173913"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gar-e3-mh8">
             <objects>
-                <navigationController storyboardIdentifier="NavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="2IK-eL-fuK" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="2IK-eL-fuK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ood-KV-hFn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ood-KV-hFn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.30196078431372547" green="0.30980392156862746" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>

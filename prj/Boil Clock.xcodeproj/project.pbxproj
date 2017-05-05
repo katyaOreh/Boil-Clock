@@ -28,7 +28,6 @@
 		4AEB84841EAA45A3005B7C9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB847F1EAA45A3005B7C9D /* AppDelegate.swift */; };
 		4AEB84B81EAA499F005B7C9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB848F1EAA499F005B7C9D /* Main.storyboard */; };
 		4AEB84D61EAA4F36005B7C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB84D31EAA4F36005B7C9D /* Assets.xcassets */; };
-		4AEB84DF1EAA6C84005B7C9D /* LFSideViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEB84DE1EAA6C84005B7C9D /* LFSideViewController.framework */; };
 		4AEB84E11EAA6CB5005B7C9D /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB84E01EAA6CB5005B7C9D /* Podfile.lock */; };
 		4AEB84EC1EAA84DC005B7C9D /* open-sans-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB84E91EAA799C005B7C9D /* open-sans-bold.ttf */; };
 		4AEB84EE1EAA84E2005B7C9D /* STIXGeneral-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB84EB1EAA799C005B7C9D /* STIXGeneral-Regular.otf */; };
@@ -61,7 +60,6 @@
 		4AEB84951EAA499F005B7C9D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AEB84D31EAA4F36005B7C9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AEB84D51EAA4F36005B7C9D /* Boil_Clock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Boil_Clock.xcdatamodel; sourceTree = "<group>"; };
-		4AEB84DE1EAA6C84005B7C9D /* LFSideViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LFSideViewController.framework; path = "../../../Library/Developer/Xcode/DerivedData/Boil_Clock-eowfusxgjvsuyqfdzkquhymdgrbt/Build/Products/Debug-iphonesimulator/LFSideViewController/LFSideViewController.framework"; sourceTree = "<group>"; };
 		4AEB84E01EAA6CB5005B7C9D /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		4AEB84E91EAA799C005B7C9D /* open-sans-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "open-sans-bold.ttf"; sourceTree = "<group>"; };
 		4AEB84EB1EAA799C005B7C9D /* STIXGeneral-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "STIXGeneral-Regular.otf"; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AEB84DF1EAA6C84005B7C9D /* LFSideViewController.framework in Frameworks */,
 				B730E602BC62593A9B9599CA /* Pods_Boil_Clock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,7 +298,6 @@
 		C75C49DCAF281A89FF27E6C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4AEB84DE1EAA6C84005B7C9D /* LFSideViewController.framework */,
 				9E73A541ED29CFF1A2D48A9C /* Pods_Boil_Clock.framework */,
 			);
 			name = Frameworks;
@@ -578,7 +574,7 @@
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AlamofireImage\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/LFSideViewController\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SlideMenuController\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftSpinner\"",
 					"\"$(SRCROOT)/../lib/\"",
 				);
@@ -601,7 +597,7 @@
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AlamofireImage\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/LFSideViewController\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SlideMenuController\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/SwiftSpinner\"",
 					"\"$(SRCROOT)/../lib/\"",
 				);

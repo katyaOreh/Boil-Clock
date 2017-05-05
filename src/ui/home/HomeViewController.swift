@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import SVProgressHUD
 
-class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DropDownDelegate
 {
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
@@ -21,6 +21,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
     private var categories       = [ProductCategory]()
     private var favoriteProducts = [Product]()
     private var products         = [Product]()
+    
+    var searchProducts : [Product]?
     
     let colors = [Constants.Color.tacao, Constants.Color.perano, Constants.Color.rajah,
                   Constants.Color.tickleMePink, Constants.Color.turquoiseBlue, Constants.Color.feijoa,
@@ -41,8 +43,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
         view.addSubview(dropdown)
         
         dropdown.addSubview(dropdown.table)
-        
-    
+        dropdown.delegate = self
     }
     
     override func viewDidLoad()
@@ -66,6 +67,26 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
         {
             CoreDataManager.sharedInstance.updateCategory(dictionary: dict)
         }
+        
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self,
+                                                 action: #selector(HomeViewController.leftSwiped))
+        
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self,
+                                                 action: #selector(HomeViewController.rightSwiped))
+        
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        
+        swipeLeft.cancelsTouchesInView = false
+        swipeRight.cancelsTouchesInView = false
+        
+        
         SVProgressHUD.show()
         ApiManager.sharedInstance.getAllCategory(success: { (categories: [ProductCategory], products :[Product] ) in
             self.categories       = categories.sorted(by: { $0.id < $1.id})
@@ -83,20 +104,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.favoriteProducts = products.filter {$0.isFavorite == true}
-        self.productsCollectionView.reloadData()
+        favoriteProducts = products.filter {$0.isFavorite == true}
+        productsCollectionView.reloadData()
     }
     
     
     @IBAction func tapOnBackground(_ sender: Any)
     {
-        self.searchTextField.resignFirstResponder()
+        searchTextField.resignFirstResponder()
     }
     
     
     @IBAction func menuPressed(_ sender: Any)
     {
-        self.sideViewController()!.toogleLeftViewController()
+       sideViewController()!.toogleLeftViewController()
+        searchTextField.resignFirstResponder()
     }
     
     
@@ -117,14 +139,37 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
         else if segue.identifier == "productDetails"
         {
             let destinationVC = segue.destination as! ProductPageViewController
-            if let indexPath = productsCollectionView?.indexPath(for: sender as! ProductCollectionViewCell)
+            
+            if sender is Product
             {
-                destinationVC.product = favoriteProducts[indexPath.row]
+                 destinationVC.product = sender as? Product
+                return
             }
         }
     }
     
-    // MARK: UICollectionView Delegate & DataSource Implementation
+    func respondToSwipeGesture(gesture: UIGestureRecognizer)
+    {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer
+        {
+            switch swipeGesture.direction
+            {
+            case UISwipeGestureRecognizerDirection.right:
+                //write your logic for right swipe
+                print("Swiped right")
+                
+            case UISwipeGestureRecognizerDirection.left:
+                //write your logic for left swipe
+                print("Swiped left")
+                
+            default:
+                break
+            }
+        }
+    }
+    
+    
+    // MARK: - UICollectionView Delegate & DataSource Implementation
   
         public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
         {
@@ -174,11 +219,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
                 let cell = collectionView.cellForItem(at: indexPath)
                 performSegue(withIdentifier: "productsList", sender: cell)
             }else{
-                let cell = collectionView.cellForItem(at: indexPath)
-                performSegue(withIdentifier: "productDetails", sender: cell)
+                performSegue(withIdentifier: "productDetails", sender: favoriteProducts[indexPath.row])
             }
             
         }
+    
+    func leftSwiped()
+    {
+        sideViewController()!.hideLeftViewController()
+    }
+    
+    func rightSwiped()
+    {
+        sideViewController()!.toogleLeftViewController()
+        searchTextField.resignFirstResponder()
+    }
     
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
@@ -200,8 +255,28 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
     
     func getProductForLetter(lets :String) -> [Product]
     {
-        let mac = products.filter{$0.title!.lowercased().contains(lets.lowercased())}
-        return mac
+        dropdown.alpha = 1
+        searchProducts = products.filter{$0.title!.lowercased().contains(lets.lowercased())}
+        return  searchProducts == nil ? [] : searchProducts!
+    }
+    
+    // MARK: - DropDownDelegate
+    
+    func didSelectItem(dropDown: DropDown, at index: Int)
+    {
+        performSegue(withIdentifier: "productDetails", sender: (searchProducts?[index])!)
+    }
+    
+    func show(dropDown: DropDown)
+    {
+
+    }
+    
+    
+    func hide(dropDown: DropDown)
+    {
+        dropdown.alpha = 0
+        searchTextField.resignFirstResponder()
     }
 }
 

@@ -62,19 +62,7 @@ class DropDown: UIView
     fileprivate var itemHeight1 = 50
     
     
-    @IBInspectable
-    var itemFontSize : CGFloat
-    {
-        set
-        {
-            itemFontSize1 = newValue
-        }
-        get
-        {
-            return itemFontSize1
-        }
-    }
-    fileprivate var itemFontSize1 : CGFloat = 14.0
+    fileprivate var itemFontSize : CGFloat = 14.0
     
     var itemFont = UIFont.systemFont(ofSize: 14)
     
@@ -117,10 +105,7 @@ class DropDown: UIView
         if isCollapsed
         {
             // removing tableview from rootview
-            UIView.animate(withDuration: 0.25, animations:
-                {
-                self.table.frame = CGRect(x: self.tableFrame.origin.x, y: self.tableFrame.origin.y+self.frame.height, width: self.frame.width, height: 0)
-            })
+
             var rootView = self.superview
             
             while rootView?.superview != nil
@@ -154,7 +139,6 @@ extension DropDown : UITableViewDelegate, UITableViewDataSource
         {
             cell = DropDownCell(style: .default, reuseIdentifier: "cell")
         }
-        
         
         let str = NSMutableAttributedString.init(string: items[indexPath.row].title!,
                                           attributes:  [NSFontAttributeName : UIFont(descriptor: itemFont.fontDescriptor, size: itemFontSize)
@@ -210,10 +194,5 @@ extension DropDown : UITableViewDelegate, UITableViewDataSource
         {
             delegate.didSelectItem(dropDown: self, at: selectedIndex)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
-    {
-        return UIView()
     }
 }
