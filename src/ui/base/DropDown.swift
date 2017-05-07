@@ -25,7 +25,7 @@ class DropDown: UIView
     var substring = ""
     
     fileprivate var titleFontSize1 : CGFloat = 14.0
-
+    
     @IBInspectable
     var itemTextColor : UIColor
     {
@@ -70,12 +70,12 @@ class DropDown: UIView
     fileprivate var selectedIndex = -1
     
     var isCollapsed = true
-
+    
     
     override func layoutSubviews()
     {
         super.layoutSubviews()
-
+        
         self.table.frame = CGRect(x: 0,
                                   y: 0,
                                   width: Int(self.frame.width),
@@ -105,7 +105,7 @@ class DropDown: UIView
         if isCollapsed
         {
             // removing tableview from rootview
-
+            
             var rootView = self.superview
             
             while rootView?.superview != nil
@@ -141,7 +141,7 @@ extension DropDown : UITableViewDelegate, UITableViewDataSource
         }
         
         let str = NSMutableAttributedString.init(string: items[indexPath.row].title!,
-                                          attributes:  [NSFontAttributeName : UIFont(descriptor: itemFont.fontDescriptor, size: itemFontSize)
+                                                 attributes:  [NSFontAttributeName : UIFont(descriptor: itemFont.fontDescriptor, size: itemFontSize)
             ])
         
         let rg  = items[indexPath.row].title?.lowercased().range(of: substring.lowercased())
@@ -151,23 +151,23 @@ extension DropDown : UITableViewDelegate, UITableViewDataSource
             return cell!
         }
         
-
+        
         let rangeStartIndex = rg!.lowerBound
         let rangeEndIndex  = rg!.upperBound
         
-       let start = items[indexPath.row].title?.distance(from: (items[indexPath.row].title?.startIndex)!, to: rangeStartIndex)
+        let start = items[indexPath.row].title?.distance(from: (items[indexPath.row].title?.startIndex)!, to: rangeStartIndex)
         
-       let length = items[indexPath.row].title?.distance(from: rangeStartIndex, to: rangeEndIndex)
+        let length = items[indexPath.row].title?.distance(from: rangeStartIndex, to: rangeEndIndex)
         
         let nsRange = NSMakeRange(start!, length!)
         
         
         str.setAttributes([NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14)],
-                           range: nsRange)
+                          range: nsRange)
         
         
         cell?.textLabel?.attributedText = str
-
+        
         cell?.productImage.af_setImage(withURL:URL.init(string: items[indexPath.row].image_url!)!, placeholderImage: nil, filter: nil, imageTransition: .noTransition, completion: { (response) -> Void in
             cell?.activityIndicator.stopAnimating()
         })

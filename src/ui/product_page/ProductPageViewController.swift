@@ -10,29 +10,33 @@ import UIKit
 import AlamofireImage
 import UserNotifications
 
-class ProductPageViewController: UIViewController
+class ProductPageViewController: UIViewController, UNUserNotificationCenterDelegate
 {
+    
     @IBOutlet weak var productImageView: UIImageView!
-    
-    @IBOutlet weak var timerLabel: UILabel!
-    
+    @IBOutlet weak var viewWithButton: UIView!
     @IBOutlet weak var productNameLabel: UILabel!
-    
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var descriptionTextView: UITextView!
+    
+    var timerLabel: UILabel!
     
     var isGrantedNotificationAccess:Bool = false
     
-    let starButton = UIButton.init()
+    
+    let center = UNUserNotificationCenter.current()
     
     var product : Product?
+
+    
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: [.alert,.sound,.badge],
-            completionHandler: { (granted,error) in
+        center.requestAuthorization( options: [.alert,.sound,.badge],
+                           completionHandler: { (granted,error) in
                 self.isGrantedNotificationAccess = granted
         })
         
@@ -41,6 +45,8 @@ class ProductPageViewController: UIViewController
                                               style: .plain,
                                               target: self,
                                               action: #selector(backBtnTapped))
+        
+        let starButton = UIButton()
         
         starButton.setImage(UIImage.init(named: "fav_add"), for: .normal)
         
@@ -58,8 +64,34 @@ class ProductPageViewController: UIViewController
         
         self.productImageView.af_setImage(withURL: URL.init(string: (product?.image_url!)!)!)
         
+        center.delegate = self
+        reloadUI()
 
     }
+    
+    
+    func reloadUI()
+    {
+        var y = 10
+        let btnHeight = 30
+        for timer in (product?.timers)!
+        {
+            let btn = UIButton.init(frame: CGRect.init(x: 0, y: y, width: Int(viewWithButton.frame.width), height: btnHeight))
+            viewWithButton.addSubview(btn)
+            btn.backgroundColor = Constants.Color.lightGreen
+            btn.tag = Int((timer as! ProductTimer).duration)
+            btn.setTitle((timer as! ProductTimer ).title, for: .normal)
+            btn.addTarget(self, action: #selector(startTapped(_:)), for: .touchUpInside)
+            btn.layer.cornerRadius = CGFloat(btnHeight / 2)
+            
+            btn.autoresizingMask = .flexibleWidth
+            
+            y += 45
+        }
+        
+        heightConstraint.constant = descriptionTextView.frame.height + CGFloat(100 - y);
+    }
+    
     
     func backBtnTapped()
     {
@@ -71,37 +103,66 @@ class ProductPageViewController: UIViewController
     {
         sender.isSelected = !sender.isSelected
         product?.isFavorite = sender.isSelected
+        
     }
 
-    @IBAction func startTapped(_ sender: UIButton)
+    func startTapped(_ sender: UIButton)
     {
-        if isGrantedNotificationAccess{
-            //add notification code here
-            
-            //Set the content of the notification
+        if sender.isSelected == true
+        {
+            center.removeAllPendingNotificationRequests()
+            sender.backgroundColor = Constants.Color.lightGreen
+            sender.isSelected = false
+        }else{
+            sender.backgroundColor = Constants.Color.darkGreen
+            sender.isSelected = true
+        }
+        
+        if isGrantedNotificationAccess
+        {
             let content = UNMutableNotificationContent()
             content.title = "10 Second Notification Demo"
-            content.subtitle = "From MakeAppPie.com"
             content.body = "Notification after 10 seconds - Your pizza is Ready!!"
+            content.sound = UNNotificationSound.default()
+      
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0,
+                                                            repeats: false)
+
+            let request = UNNotificationRequest(identifier: "10.second.message",
+                                                   content: content,
+                                                   trigger: trigger)
             
-            //Set the trigger of the notification -- here a timer.
-            let trigger = UNTimeIntervalNotificationTrigger(
-                timeInterval: 10.0,
-                repeats: false)
-            
-            //Set the request for the notification from the above
-            let request = UNNotificationRequest(
-                identifier: "10.second.message",
-                content: content,
-                trigger: trigger
-            )
-            
-            //Add the notification to the currnet notification center
-            UNUserNotificationCenter.current().add(
-                request, withCompletionHandler: nil)
-         //  let alert =  UIAlertController.init(title: "___", message:"" , preferredStyle: .alert)
-            
+            center.add(request, withCompletionHandler: nil)
         }
     }
-
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "productReady"
+        {
+            let destinationVC = segue.destination as! PopupViewController
+            destinationVC.backgroundImage = takeSnapshotOfView()
+        }
+    }
+    
+    
+    //MARK: - "UNUserNotificationCenterDelegate"
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        performSegue(withIdentifier: "productReady", sender: nil)
+    }
+    
+    
+    func takeSnapshotOfView() -> UIImage
+    {
+        
+        UIGraphicsBeginImageContext(CGSize.init(width: view.frame.size.width, height: view.frame.size.height))
+        view.drawHierarchy(in: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
 }

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4A20D28E1EB140FD00B10BA5 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D28C1EB140FD00B10BA5 /* ApiManager.swift */; };
-		4A20D2A81EB14C0600B10BA5 /* Timer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2A21EB14C0600B10BA5 /* Timer+CoreDataClass.swift */; };
-		4A20D2A91EB14C0600B10BA5 /* Timer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2A31EB14C0600B10BA5 /* Timer+CoreDataProperties.swift */; };
 		4A20D2AA1EB14C0600B10BA5 /* ProductCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2A41EB14C0600B10BA5 /* ProductCategory+CoreDataClass.swift */; };
 		4A20D2AB1EB14C0600B10BA5 /* ProductCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2A51EB14C0600B10BA5 /* ProductCategory+CoreDataProperties.swift */; };
 		4A20D2AC1EB14C0600B10BA5 /* Product+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2A61EB14C0600B10BA5 /* Product+CoreDataClass.swift */; };
@@ -17,6 +15,8 @@
 		4A20D2AF1EB14CA800B10BA5 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2AE1EB14CA800B10BA5 /* UIColor+hex.swift */; };
 		4A20D2B11EB23FCE00B10BA5 /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2B01EB23FCE00B10BA5 /* ProductsListViewController.swift */; };
 		4A752A9B1EB279FF0097DE54 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A752A9A1EB279FF0097DE54 /* BaseViewController.swift */; };
+		4A75E0B41EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A75E0B21EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift */; };
+		4A75E0B51EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A75E0B31EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift */; };
 		4A8CFA551EAC85E50077B7BE /* Boil_Clock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB84D41EAA4F36005B7C9D /* Boil_Clock.xcdatamodeld */; };
 		4A8CFA631EAD3E460077B7BE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CFA611EAD3E460077B7BE /* CoreDataManager.swift */; };
 		4A8CFA791EADEF2C0077B7BE /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CFA6F1EADEF2C0077B7BE /* CustomCollectionViewCell.swift */; };
@@ -34,13 +34,12 @@
 		4AEEE24E1EA67BA700E3FC22 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEEE24C1EA67BA700E3FC22 /* Constants.swift */; };
 		4AF60B441EBB43AF00BDC34F /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF60B431EBB43AF00BDC34F /* DropDown.swift */; };
 		4AF60B481EBB80D900BDC34F /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF60B471EBB80D900BDC34F /* DropDownCell.swift */; };
+		4AF60B4D1EBCEDAE00BDC34F /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF60B4C1EBCEDAE00BDC34F /* PopupViewController.swift */; };
 		B730E602BC62593A9B9599CA /* Pods_Boil_Clock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E73A541ED29CFF1A2D48A9C /* Pods_Boil_Clock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A20D28C1EB140FD00B10BA5 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
-		4A20D2A21EB14C0600B10BA5 /* Timer+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Timer+CoreDataClass.swift"; path = "managedObjects/Timer+CoreDataClass.swift"; sourceTree = "<group>"; };
-		4A20D2A31EB14C0600B10BA5 /* Timer+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Timer+CoreDataProperties.swift"; path = "managedObjects/Timer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4A20D2A41EB14C0600B10BA5 /* ProductCategory+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProductCategory+CoreDataClass.swift"; path = "managedObjects/ProductCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4A20D2A51EB14C0600B10BA5 /* ProductCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProductCategory+CoreDataProperties.swift"; path = "managedObjects/ProductCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4A20D2A61EB14C0600B10BA5 /* Product+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Product+CoreDataClass.swift"; path = "managedObjects/Product+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -48,6 +47,8 @@
 		4A20D2AE1EB14CA800B10BA5 /* UIColor+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		4A20D2B01EB23FCE00B10BA5 /* ProductsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
 		4A752A9A1EB279FF0097DE54 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		4A75E0B21EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProductTimer+CoreDataClass.swift"; path = "managedObjects/ProductTimer+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4A75E0B31EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProductTimer+CoreDataProperties.swift"; path = "managedObjects/ProductTimer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4A8CFA611EAD3E460077B7BE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4A8CFA6F1EADEF2C0077B7BE /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		4A8CFA701EADEF2C0077B7BE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		4AEEE24C1EA67BA700E3FC22 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4AF60B431EBB43AF00BDC34F /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		4AF60B471EBB80D900BDC34F /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
+		4AF60B4C1EBCEDAE00BDC34F /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		63799CD27DCC57CF23488C33 /* Pods-Boil Clock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boil Clock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Boil Clock/Pods-Boil Clock.debug.xcconfig"; sourceTree = "<group>"; };
 		9E73A541ED29CFF1A2D48A9C /* Pods_Boil_Clock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Boil_Clock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A7F7C46549D682644156F7 /* Pods-Boil Clock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boil Clock.release.xcconfig"; path = "Pods/Target Support Files/Pods-Boil Clock/Pods-Boil Clock.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				4A752A9A1EB279FF0097DE54 /* BaseViewController.swift */,
+				4AF60B4C1EBCEDAE00BDC34F /* PopupViewController.swift */,
 				4AF60B431EBB43AF00BDC34F /* DropDown.swift */,
 				4AF60B471EBB80D900BDC34F /* DropDownCell.swift */,
 			);
@@ -153,8 +156,8 @@
 		4A8CFA601EAD3E460077B7BE /* coreData */ = {
 			isa = PBXGroup;
 			children = (
-				4A20D2A21EB14C0600B10BA5 /* Timer+CoreDataClass.swift */,
-				4A20D2A31EB14C0600B10BA5 /* Timer+CoreDataProperties.swift */,
+				4A75E0B21EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift */,
+				4A75E0B31EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift */,
 				4A20D2A41EB14C0600B10BA5 /* ProductCategory+CoreDataClass.swift */,
 				4A20D2A51EB14C0600B10BA5 /* ProductCategory+CoreDataProperties.swift */,
 				4A20D2A61EB14C0600B10BA5 /* Product+CoreDataClass.swift */,
@@ -438,10 +441,13 @@
 				4AEB84841EAA45A3005B7C9D /* AppDelegate.swift in Sources */,
 				4A8CFA791EADEF2C0077B7BE /* CustomCollectionViewCell.swift in Sources */,
 				4A8CFA7F1EADEF2C0077B7BE /* ProductCollectionViewCell.swift in Sources */,
+				4A75E0B41EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift in Sources */,
+				4AF60B4D1EBCEDAE00BDC34F /* PopupViewController.swift in Sources */,
 				4A8CFA631EAD3E460077B7BE /* CoreDataManager.swift in Sources */,
 				4A20D2AA1EB14C0600B10BA5 /* ProductCategory+CoreDataClass.swift in Sources */,
 				4AF60B441EBB43AF00BDC34F /* DropDown.swift in Sources */,
 				4A752A9B1EB279FF0097DE54 /* BaseViewController.swift in Sources */,
+				4A75E0B51EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift in Sources */,
 				4A8CFA7C1EADEF2C0077B7BE /* RootViewController.swift in Sources */,
 				4A8CFA7A1EADEF2C0077B7BE /* HomeViewController.swift in Sources */,
 				4A20D2AD1EB14C0600B10BA5 /* Product+CoreDataProperties.swift in Sources */,
@@ -450,12 +456,10 @@
 				4AEEE24E1EA67BA700E3FC22 /* Constants.swift in Sources */,
 				4A8CFA551EAC85E50077B7BE /* Boil_Clock.xcdatamodeld in Sources */,
 				4A20D2AC1EB14C0600B10BA5 /* Product+CoreDataClass.swift in Sources */,
-				4A20D2A91EB14C0600B10BA5 /* Timer+CoreDataProperties.swift in Sources */,
 				4A20D2AB1EB14C0600B10BA5 /* ProductCategory+CoreDataProperties.swift in Sources */,
 				4A20D2B11EB23FCE00B10BA5 /* ProductsListViewController.swift in Sources */,
 				4A20D2AF1EB14CA800B10BA5 /* UIColor+hex.swift in Sources */,
 				4A20D28E1EB140FD00B10BA5 /* ApiManager.swift in Sources */,
-				4A20D2A81EB14C0600B10BA5 /* Timer+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -556,7 +560,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

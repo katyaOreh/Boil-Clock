@@ -46,8 +46,7 @@ class CoreDataManager: NSObject
         }
     }
     
-    
-    
+        
     func updateProduct(dictionary : Dictionary< String, Any>) -> Product
     {
         let predicate =  NSPredicate.init(format: "id == %@", dictionary["id"] as! CVarArg)
@@ -65,7 +64,17 @@ class CoreDataManager: NSObject
         
         product.category  = category
         
-
+        var timers = NSMutableSet()
+        
+        for  dict in dictionary["timers"] as! [Dictionary<String, Any>]
+        {
+            let timer = createTamer(dict: dict)
+            timers.add(timer)
+        }
+        
+        product.timers = timers
+        
+        
         do {
             try self.persistentContainer.viewContext.save()
         } catch let error as NSError {
@@ -73,6 +82,22 @@ class CoreDataManager: NSObject
         }
         return product
     }
+    
+    
+    func createTamer(dict: Dictionary <String, Any>) -> ProductTimer
+    {
+        
+        let managedContext = self.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "ProductTimer",  in: managedContext)!
+        
+        let timer =  NSManagedObject(entity: entity, insertInto: managedContext) as! ProductTimer
+        
+        timer.duration = dict["duration"] as! Int32
+        timer.title    = dict["description"] as? String
+        return timer
+    }
+    
+    
     
     func updateCategory(dictionary : Dictionary< String, Any>) -> ProductCategory
     {
@@ -101,7 +126,6 @@ class CoreDataManager: NSObject
             }
         }
         
-        
         do
         {
             try self.persistentContainer.viewContext.save()
@@ -111,6 +135,9 @@ class CoreDataManager: NSObject
         return productCategory
     }
 
+    
+    
+    
     
     func findManagedObjectFromEntity(entityName :String, predicate : NSPredicate, createNewIfAbsent: Bool) -> NSManagedObject?
     {
