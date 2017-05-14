@@ -14,6 +14,9 @@
 		4A20D2AD1EB14C0600B10BA5 /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2A71EB14C0600B10BA5 /* Product+CoreDataProperties.swift */; };
 		4A20D2AF1EB14CA800B10BA5 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2AE1EB14CA800B10BA5 /* UIColor+hex.swift */; };
 		4A20D2B11EB23FCE00B10BA5 /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20D2B01EB23FCE00B10BA5 /* ProductsListViewController.swift */; };
+		4A3358361EBF9D4D002C7FF6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3358351EBF9D4D002C7FF6 /* DataModel.swift */; };
+		4A33585D1EC06723002C7FF6 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A33585C1EC06723002C7FF6 /* SplashViewController.swift */; };
+		4A4E50641EC6474700E02F95 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E50631EC6474700E02F95 /* MenuTableViewCell.swift */; };
 		4A752A9B1EB279FF0097DE54 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A752A9A1EB279FF0097DE54 /* BaseViewController.swift */; };
 		4A75E0B41EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A75E0B21EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift */; };
 		4A75E0B51EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A75E0B31EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift */; };
@@ -46,6 +49,9 @@
 		4A20D2A71EB14C0600B10BA5 /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Product+CoreDataProperties.swift"; path = "managedObjects/Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4A20D2AE1EB14CA800B10BA5 /* UIColor+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		4A20D2B01EB23FCE00B10BA5 /* ProductsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
+		4A3358351EBF9D4D002C7FF6 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		4A33585C1EC06723002C7FF6 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		4A4E50631EC6474700E02F95 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		4A752A9A1EB279FF0097DE54 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4A75E0B21EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProductTimer+CoreDataClass.swift"; path = "managedObjects/ProductTimer+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4A75E0B31EBDA0D900108C7D /* ProductTimer+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProductTimer+CoreDataProperties.swift"; path = "managedObjects/ProductTimer+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -134,6 +140,14 @@
 			path = graphicsCommon;
 			sourceTree = "<group>";
 		};
+		4A33585B1EC0629D002C7FF6 /* splash_screen */ = {
+			isa = PBXGroup;
+			children = (
+				4A33585C1EC06723002C7FF6 /* SplashViewController.swift */,
+			);
+			path = splash_screen;
+			sourceTree = "<group>";
+		};
 		4A752A8F1EB26ED20097DE54 /* lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +184,7 @@
 		4A8CFA6D1EADEF2C0077B7BE /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				4A33585B1EC0629D002C7FF6 /* splash_screen */,
 				4A752A991EB279CD0097DE54 /* base */,
 				4A8CFA6E1EADEF2C0077B7BE /* home */,
 				4A8CFA711EADEF2C0077B7BE /* menu */,
@@ -193,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				4A8CFA721EADEF2C0077B7BE /* MenuViewController.swift */,
+				4A4E50631EC6474700E02F95 /* MenuTableViewCell.swift */,
 				4A8CFA731EADEF2C0077B7BE /* RootViewController.swift */,
 			);
 			path = menu;
@@ -269,10 +285,10 @@
 		4AEEE24A1EA67BA700E3FC22 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				4AEEE24B1EA67BA700E3FC22 /* data */,
 				4A20D28F1EB1422900B10BA5 /* extensions */,
 				4A20D28B1EB140FD00B10BA5 /* server */,
 				4A8CFA6D1EADEF2C0077B7BE /* ui */,
-				4AEEE24B1EA67BA700E3FC22 /* data */,
 				4AEB847F1EAA45A3005B7C9D /* AppDelegate.swift */,
 			);
 			name = src;
@@ -284,6 +300,7 @@
 			children = (
 				4A8CFA601EAD3E460077B7BE /* coreData */,
 				4AEEE24C1EA67BA700E3FC22 /* Constants.swift */,
+				4A3358351EBF9D4D002C7FF6 /* DataModel.swift */,
 			);
 			name = data;
 			path = ../src/data;
@@ -342,7 +359,7 @@
 					4AEEE2301EA6715300E3FC22 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = P99QFLTPH8;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -442,6 +459,7 @@
 				4A8CFA791EADEF2C0077B7BE /* CustomCollectionViewCell.swift in Sources */,
 				4A8CFA7F1EADEF2C0077B7BE /* ProductCollectionViewCell.swift in Sources */,
 				4A75E0B41EBDA0D900108C7D /* ProductTimer+CoreDataClass.swift in Sources */,
+				4A3358361EBF9D4D002C7FF6 /* DataModel.swift in Sources */,
 				4AF60B4D1EBCEDAE00BDC34F /* PopupViewController.swift in Sources */,
 				4A8CFA631EAD3E460077B7BE /* CoreDataManager.swift in Sources */,
 				4A20D2AA1EB14C0600B10BA5 /* ProductCategory+CoreDataClass.swift in Sources */,
@@ -454,9 +472,11 @@
 				4A8CFA7B1EADEF2C0077B7BE /* MenuViewController.swift in Sources */,
 				4A8CFA7D1EADEF2C0077B7BE /* ProductPageViewController.swift in Sources */,
 				4AEEE24E1EA67BA700E3FC22 /* Constants.swift in Sources */,
+				4A33585D1EC06723002C7FF6 /* SplashViewController.swift in Sources */,
 				4A8CFA551EAC85E50077B7BE /* Boil_Clock.xcdatamodeld in Sources */,
 				4A20D2AC1EB14C0600B10BA5 /* Product+CoreDataClass.swift in Sources */,
 				4A20D2AB1EB14C0600B10BA5 /* ProductCategory+CoreDataProperties.swift in Sources */,
+				4A4E50641EC6474700E02F95 /* MenuTableViewCell.swift in Sources */,
 				4A20D2B11EB23FCE00B10BA5 /* ProductsListViewController.swift in Sources */,
 				4A20D2AF1EB14CA800B10BA5 /* UIColor+hex.swift in Sources */,
 				4A20D28E1EB140FD00B10BA5 /* ApiManager.swift in Sources */,
@@ -573,6 +593,8 @@
 			baseConfigurationReference = 63799CD27DCC57CF23488C33 /* Pods-Boil Clock.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Svishchov (M6FTYW6QZN)";
 				DEVELOPMENT_TEAM = P99QFLTPH8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -587,6 +609,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "anka.Boil-Clock";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "59ff05fd-63e0-49c1-8b2e-7b6aa56b4664";
+				PROVISIONING_PROFILE_SPECIFIER = "Prophonix Development";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -596,7 +620,9 @@
 			baseConfigurationReference = D9A7F7C46549D682644156F7 /* Pods-Boil Clock.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = P99QFLTPH8;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Svishchov (M6FTYW6QZN)";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
@@ -610,6 +636,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "anka.Boil-Clock";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

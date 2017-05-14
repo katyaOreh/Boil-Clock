@@ -29,6 +29,7 @@ class CoreDataManager: NSObject
             return container
     }()
     
+
     // MARK: - Core Data Saving support
     
     func saveContext ()
@@ -59,16 +60,18 @@ class CoreDataManager: NSObject
         product.title               = dictionary["title"] as! String?
         
         let dict =  dictionary["category"] as! Dictionary< String, Any>
+        
+        
         let categoryPredicate =  NSPredicate.init(format: "type == %@", dict["type"] as! CVarArg)
         let category = self.findManagedObjectFromEntity(entityName: "ProductCategory", predicate: categoryPredicate, createNewIfAbsent: true) as! ProductCategory
         
         product.category  = category
         
-        var timers = NSMutableSet()
+        let timers = NSMutableSet()
         
         for  dict in dictionary["timers"] as! [Dictionary<String, Any>]
         {
-            let timer = createTamer(dict: dict)
+            let timer = createTimer(dict: dict)
             timers.add(timer)
         }
         
@@ -84,7 +87,39 @@ class CoreDataManager: NSObject
     }
     
     
-    func createTamer(dict: Dictionary <String, Any>) -> ProductTimer
+    
+    
+    func getAllCategories() -> [ProductCategory]?
+    {
+        let moc = self.persistentContainer.viewContext
+        let employeesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductCategory")
+        
+        do {
+            let fetchedEmployees = try moc.fetch(employeesFetch) as! [ProductCategory]
+            return fetchedEmployees
+        } catch {
+            
+        }
+        return []
+    }
+    
+    
+    func getAllProducts() -> [Product]?
+    {
+        let moc = self.persistentContainer.viewContext
+        let productFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Product")
+        
+        do {
+            let fetchedProducts = try moc.fetch(productFetch) as! [Product]
+            return fetchedProducts
+        } catch {
+            
+        }
+        return []
+    }
+    
+    
+    func createTimer(dict: Dictionary <String, Any>) -> ProductTimer
     {
         
         let managedContext = self.persistentContainer.viewContext
@@ -105,25 +140,13 @@ class CoreDataManager: NSObject
         
         let productCategory = self.findManagedObjectFromEntity(entityName: "ProductCategory", predicate: predicate, createNewIfAbsent: true) as! ProductCategory
         
-        productCategory.type = (dictionary["type"] as! Int16?)!
         productCategory.title  = dictionary["name"] as! String?
-        
-        if let imageName = dictionary["image_name"] as! String?
-        {
-            productCategory.image_name = imageName
-        }
-        
-        if let color = dictionary["color"] as! String?
-        {
-            productCategory.color = color
-        }
-        
+        productCategory.type = (dictionary["type"] as! Int16?)!
+
         if let id = dictionary["id"] as? Int16
         {
-            if id > 0
-            {
+
                 productCategory.id = id
-            }
         }
         
         do
@@ -135,7 +158,42 @@ class CoreDataManager: NSObject
         return productCategory
     }
 
+
     
+    func createCategories(dictionary : Dictionary< String, Any>)
+    {
+        
+        let managedContext = self.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "ProductCategory",
+                                                         in: managedContext)!
+        
+        let productCategory = NSManagedObject(entity: entity, insertInto: managedContext) as! ProductCategory
+
+        productCategory.type = (dictionary["type"] as! Int16?)!
+        productCategory.title  = dictionary["name"] as! String?
+        
+        if let imageName = dictionary["image_name"] as! String?
+        {
+            productCategory.image_name = imageName
+        }
+        
+        if let id = dictionary["id"] as? Int16
+        {
+                productCategory.id = id
+        }
+        
+        if let color = dictionary["color"] as! String?
+        {
+            productCategory.color = color
+        }
+        do
+        {
+            try self.persistentContainer.viewContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
     
     
     

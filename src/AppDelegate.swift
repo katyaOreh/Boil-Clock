@@ -20,13 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        
         return true
     }
 
     func applicationWillTerminate(_ application: UIApplication)
     {
-
         CoreDataManager.sharedInstance.saveContext()
     }
 

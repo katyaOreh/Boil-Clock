@@ -21,6 +21,8 @@ class PopupViewController: UIViewController
     }
 
     @IBOutlet weak var backgroundImageView: UIImageView!
+    
+    
     var backgroundImage: UIImage?
     private func setupTransparentView()
     {

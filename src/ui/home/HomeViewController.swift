@@ -51,23 +51,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
         super.viewDidLoad()
         
         
-        let productCategories : [Dictionary<String, Any>]  =  [["title": "ЯЙЦА", "image_name": "cat_eggs", "type": NSNumber.init(value: 4), "color" : "#f2a482", "id" : Int16(0)],
-                                                               ["title": "КРУПЫ И КАШИ", "image_name": "cat_groats", "type":NSNumber.init(value: 6), "color" : "#a0b7f1",  "id" : Int16(1)],
-                                                               ["title": "МАКАРОНЫ", "image_name": "cat_pasta", "type":NSNumber.init(value: 7), "color" : "#f4bd75", "id" : Int16(2)],
-                                                               ["title" : "МЯСО", "image_name": "cat_meat", "type":NSNumber.init(value: 0), "color" : "#ff89aa",  "id" : Int16(3)],
-                                                               ["title" : "РЫБА", "image_name": "cat_fish", "type":NSNumber.init(value: 2), "color" : "#70e0ed", "id" : Int16(4)],
-                                                               ["title" : "ОВОЩИ", "image_name": "cat_veg", "type":NSNumber.init(value: 1), "color" : "#b5dd7a", "id" : Int16(5)],
-                                                               ["title" : "МОРЕПРОУКТЫ", "image_name": "cat_seafood", "type":NSNumber.init(value: 3), "color" : "#d9a0f1",  "id" : Int16(6)],
-                                                               ["title" : "ГРИБЫ", "image_name": "cat_mashr", "type":NSNumber.init(value: 5), "color" : "#7bdea8",  "id" : Int16(7)],
-                                                               
-                                                               ["title" : "ДРУГОЕ", "image_name": "cat_other", "type":NSNumber.init(value: 8), "color" : "#f794dc",  "id" : Int16(7)]]
+        categories = CoreDataManager.sharedInstance.getAllCategories()!
+        categoryCollectionView.reloadData()
         
-        
-        for dict in productCategories
-        {
-            CoreDataManager.sharedInstance.updateCategory(dictionary: dict)
-        }
-        
+        products = CoreDataManager.sharedInstance.getAllProducts()!
+        productsCollectionView.reloadData()
         
         let swipeLeft = UISwipeGestureRecognizer(target: self,
                                                  action: #selector(HomeViewController.leftSwiped))
@@ -85,19 +73,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
         
         swipeLeft.cancelsTouchesInView = false
         swipeRight.cancelsTouchesInView = false
-        
-        
-        SVProgressHUD.show()
-        ApiManager.sharedInstance.getAllCategory(success: { (categories: [ProductCategory], products :[Product] ) in
-            self.categories       = categories.sorted(by: { $0.id < $1.id})
-            self.products         = products
-            self.favoriteProducts = products.filter {$0.isFavorite == true}
-            self.categoryCollectionView.reloadData()
-            self.productsCollectionView.reloadData()
-            SVProgressHUD.dismiss()
-        }) {
-            
-        }
+    
     }
     
     
@@ -144,26 +120,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
             {
                  destinationVC.product = sender as? Product
                 return
-            }
-        }
-    }
-    
-    func respondToSwipeGesture(gesture: UIGestureRecognizer)
-    {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer
-        {
-            switch swipeGesture.direction
-            {
-            case UISwipeGestureRecognizerDirection.right:
-                //write your logic for right swipe
-                print("Swiped right")
-                
-            case UISwipeGestureRecognizerDirection.left:
-                //write your logic for left swipe
-                print("Swiped left")
-                
-            default:
-                break
             }
         }
     }
@@ -257,13 +213,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate,  UICollectionVi
     {
         dropdown.alpha = 1
         searchProducts = products.filter{$0.title!.lowercased().contains(lets.lowercased())}
-        return  searchProducts == nil ? [] : searchProducts!
+        return  searchProducts!
     }
     
     // MARK: - DropDownDelegate
     
     func didSelectItem(dropDown: DropDown, at index: Int)
     {
+        if searchProducts?.isEmpty == true
+        {
+            return
+        }
         performSegue(withIdentifier: "productDetails", sender: (searchProducts?[index])!)
     }
     

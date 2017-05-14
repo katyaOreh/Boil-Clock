@@ -40,6 +40,7 @@ open class LFSideViewController: UIViewController {
     open var contentView: UIView?
     open var leftViewControllerVisible: Bool = false
     open var rightViewControllerVisible: Bool = false
+    var overlayCenterView = UIView()
     
     open weak var leftViewController : UIViewController? {
         willSet {
@@ -98,6 +99,15 @@ open class LFSideViewController: UIViewController {
         super.viewDidLoad()
         self.contentView = UIView(frame: self.view.frame)
         self.view.insertSubview(self.contentView!, at: 0)
+        self.overlayCenterView.frame = CGRect.init(x: (contentView?.frame.width)! - 70,
+                                                   y: 0,
+                                                   width: 70,
+                                                   height :(contentView?.frame.height)!)
+        
+        self.overlayCenterView.backgroundColor = UIColor.init(white: 0, alpha: 0.8)
+        self.view.addSubview(self.overlayCenterView)
+        self.leftSide = (self.contentView?.frame.width)! - 70
+        self.overlayCenterView.alpha = 0
     }
     
     override open var shouldAutorotate : Bool {
@@ -141,6 +151,7 @@ open class LFSideViewController: UIViewController {
     
     open func hideLeftViewController() {
         self.hideLeftViewController(self.animationDuration, dampingRatio: 1.0, velocity: 0.0, options: .curveEaseOut)
+        self.overlayCenterView.alpha = 0
     }
     
     open func hideRightViewController() {
@@ -158,6 +169,7 @@ open class LFSideViewController: UIViewController {
             initialSpringVelocity: velocity,
             options: options,
             animations: {
+                self.overlayCenterView.alpha = 1
                 self.contentViewController!.view.frame.origin.x = self.leftSide
             }, completion: {_ in
                 self.delegate?.didPresentViewController?(self.leftViewController)

@@ -9,16 +9,18 @@
 import UIKit
 import AlamofireImage
 import UserNotifications
+import AVFoundation
 
 class ProductPageViewController: UIViewController, UNUserNotificationCenterDelegate
 {
     
-    @IBOutlet weak var productImageView: UIImageView!
+    var productImageView = UIImageView()
     @IBOutlet weak var viewWithButton: UIView!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    var circleView = UIImageView()
     var timerLabel: UILabel!
     
     var isGrantedNotificationAccess:Bool = false
@@ -29,16 +31,19 @@ class ProductPageViewController: UIViewController, UNUserNotificationCenterDeleg
     var product : Product?
 
     
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+    
         center.requestAuthorization( options: [.alert,.sound,.badge],
                            completionHandler: { (granted,error) in
                 self.isGrantedNotificationAccess = granted
         })
+        
+        
+        self.view.addSubview(circleView)
+        self.view.addSubview(productImageView)
         
         
         let backButton = UIBarButtonItem.init(image: UIImage.init(named: "back_btn"),
@@ -59,11 +64,22 @@ class ProductPageViewController: UIViewController, UNUserNotificationCenterDeleg
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.rightBarButtonItem = barButton
         
-        self.descriptionTextView.text = product?.product_description
-        self.productNameLabel.text    = product?.title
+        descriptionTextView.text = product?.product_description
+        productNameLabel.text    = product?.title
         
-        self.productImageView.af_setImage(withURL: URL.init(string: (product?.image_url!)!)!)
+  
+        circleView.image =  UIImage.init(named: "time_base")
+        circleView.sizeToFit()
+        if UIScreen.main.bounds.width == 320
+        {
+            circleView.frame = CGRect.init(x: 0, y: 0, width: circleView.frame.width * 0.8, height: circleView.frame.height * 0.8)
+        }
+        circleView.center = CGPoint.init(x:self.view.frame.width / 2, y: circleView.frame.height / 2 + 25)
+        productImageView.frame = CGRect.init(x: circleView.frame.minX + 15, y: circleView.frame.minY + 15, width: circleView.frame.width - 30, height: circleView.frame.width - 30)
+        productImageView.af_setImage(withURL: URL.init(string: (product?.image_url!)!)!, placeholderImage: nil, filter: nil, imageTransition: .noTransition, completion: { (response) -> Void in
+        })
         
+
         center.delegate = self
         reloadUI()
 
@@ -74,6 +90,7 @@ class ProductPageViewController: UIViewController, UNUserNotificationCenterDeleg
     {
         var y = 10
         let btnHeight = 30
+       
         for timer in (product?.timers)!
         {
             let btn = UIButton.init(frame: CGRect.init(x: 0, y: y, width: Int(viewWithButton.frame.width), height: btnHeight))
@@ -89,8 +106,15 @@ class ProductPageViewController: UIViewController, UNUserNotificationCenterDeleg
             y += 45
         }
         
-        heightConstraint.constant = descriptionTextView.frame.height + CGFloat(100 - y);
+        heightConstraint.constant = descriptionTextView.frame.height + CGFloat(100 - y)
+        descriptionTextView.sizeToFit()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+              self.descriptionTextView.scrollRangeToVisible(NSMakeRange(0, 0))
+        }
+      
     }
+    
+
     
     
     func backBtnTapped()
